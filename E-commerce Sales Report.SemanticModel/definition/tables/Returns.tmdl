@@ -1,0 +1,27 @@
+table Returns
+	lineageTag: 974c0c87-7830-4223-840d-a392644541a3
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 45f5de4d-ed97-4df3-bfca-37c6bb71c8b4
+		summarizeBy: none
+		sourceColumn: Order ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Returns = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("E:\PORTFOLIO\POWER BI\E-commerce Sales Report\dataset\Returns.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Returned", type text}, {"Order ID", type text}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type1",{"Order ID"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

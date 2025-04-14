@@ -1,0 +1,10 @@
+EVALUATE
+SELECTCOLUMNS(
+FILTER(INFO.VIEW.COLUMNS(),
+[IsHidden] = FALSE()
+),
+"Table name", [Table],
+"Column name", [Name],
+"Data type", [DataType],
+"Is unique", [IsUnique]
+)

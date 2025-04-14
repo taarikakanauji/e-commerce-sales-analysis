@@ -1,0 +1,13 @@
+EVALUATE
+SELECTCOLUMNS(
+FILTER(INFO.VIEW.MEASURES(),
+[IsHidden] =FALSE()
+),
+"Table name", [Table],
+"coloumn name", [Name],
+"data type", [DataType],
+"expression formula", [Expression],
+"format", [FormatStringDefinition],
+"is hidden", [IsHidden]
+
+)

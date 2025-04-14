@@ -1,0 +1,35 @@
+table 'Date table'
+	lineageTag: 173216a6-35d1-4202-ac24-2d2ccbbfe43b
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: Long Date
+		lineageTag: 1d6dfcbe-3daf-4efd-89a0-a36e2fca66d1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'start of month'
+		formatString: mmmm\, yyyy
+		lineageTag: 33ff312b-45ff-4848-962b-7895eabbd0a2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [start of month]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition 'Date table' = calculated
+		mode: import
+		source = ADDCOLUMNS(CALENDAR(MIN(Orders[Order Date]),MAX(Orders[Order Date])),"start of month", EOMONTH( [Date],-1)+1)
+
+	annotation PBI_Id = 07cb67cce15e45cb8f91447f70b0a29a
+

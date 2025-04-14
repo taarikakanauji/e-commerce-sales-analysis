@@ -1,0 +1,74 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 267,
+            "y": 108.25
+          },
+          "nodeIndex": "Orders",
+          "nodeLineageTag": "7c709350-35d7-48ad-ad9a-d74d94ebff2c",
+          "size": {
+            "height": 614,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 560,
+            "y": 0
+          },
+          "nodeIndex": "Returns",
+          "nodeLineageTag": "974c0c87-7830-4223-840d-a392644541a3",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Date table",
+          "nodeLineageTag": "173216a6-35d1-4202-ac24-2d2ccbbfe43b",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 874,
+            "y": 177.5
+          },
+          "nodeIndex": "Key Measures",
+          "nodeLineageTag": "f6e3035d-e16b-46f8-948d-61965dee0ca1",
+          "size": {
+            "height": 312,
+            "width": 234
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

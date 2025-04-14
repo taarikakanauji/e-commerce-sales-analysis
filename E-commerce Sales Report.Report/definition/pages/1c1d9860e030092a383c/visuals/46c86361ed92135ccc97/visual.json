@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.6.0/schema.json",
+  "name": "46c86361ed92135ccc97",
+  "position": {
+    "x": 980.00587027296046,
+    "y": 0,
+    "z": 7000,
+    "height": 720,
+    "width": 300,
+    "tabOrder": 3000
+  },
+  "visualGroup": {
+    "displayName": "slicers pane",
+    "groupMode": "ScaleMode"
+  },
+  "isHidden": true
+}

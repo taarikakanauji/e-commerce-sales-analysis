@@ -1,0 +1,79 @@
+createOrReplace
+
+	table 'Key Measures'
+		lineageTag: f6e3035d-e16b-46f8-948d-61965dee0ca1
+
+		measure 'Total sales' = SUM(Orders[Sales])
+			formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+			displayFolder: Metrics
+			lineageTag: a97669cd-c499-4bf7-baad-bbf102a898ea
+
+			annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+		measure 'Total Profit' = SUM(Orders[Profit])
+			formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+			displayFolder: Metrics
+			lineageTag: 5fe0f0d1-4e6b-402a-a887-ba18df185e12
+
+			annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+		measure '% of Returned orders' = ```
+				
+				VAR _total_orders = DISTINCTCOUNT(Orders[Order ID])
+				VAR _return_orders = DISTINCTCOUNT(Returns[Order ID])
+				VAR _percentage = 
+				DIVIDE(
+				    _return_orders,
+				    _total_orders)
+				    RETURN
+				    _percentage
+				```
+			formatString: 0.00%;-0.00%;0.00%
+			displayFolder: Metrics
+			lineageTag: bd6fa13d-98f1-47a2-98d4-16a4474e2c52
+
+		measure 'Sales PY' = CALCULATE([Total sales], SAMEPERIODLASTYEAR('Date table'[Date]))
+			formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+			displayFolder: PY
+			lineageTag: 4b69c395-b564-4ac7-bbce-ec68671d8b5f
+
+			annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+		measure 'Profit PY' = CALCULATE([Total Profit],SAMEPERIODLASTYEAR('Date table'[Date]))
+			displayFolder: PY
+			lineageTag: 74482d0b-b9fd-4075-84ca-cbef9df6c934
+
+			annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		measure '% returned orders PY' = CALCULATE([% of Returned orders], SAMEPERIODLASTYEAR( 'Date table'[Date]))
+			formatString: #,0.00%;-#,0.00%;#,0.00%
+			displayFolder: PY
+			lineageTag: af20b7ac-ccf4-4aad-b118-13f197db63ab
+
+		measure '% change of sales (PY)' = DIVIDE( [Total sales] - [Sales PY], [Sales PY])
+			formatString: 0.00%;-0.00%;0.00%
+			displayFolder: vs PY
+			lineageTag: 7961b2d0-b181-4693-b053-5af191b93b28
+
+		measure '% change of profit(PY)' = DIVIDE([Total Profit] - [Profit PY],[Profit PY])
+			formatString: #,0.00%;-#,0.00%;#,0.00%
+			displayFolder: vs PY
+			lineageTag: b38d75bb-3d48-44aa-b567-47234c662dd6
+
+		measure '% returned orders (PY)' = [% of Returned orders] - [% returned orders PY]
+			formatString: 0.00%;-0.00%;0.00%
+			displayFolder: vs PY
+			lineageTag: 03888817-42b4-4204-a6b6-1039a65c509c
+
+		partition 'Key Measures' = m
+			mode: import
+			source =
+					let
+					    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+					    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+					    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+					in
+					    #"Removed Columns"
+
+		annotation PBI_ResultType = Table
+

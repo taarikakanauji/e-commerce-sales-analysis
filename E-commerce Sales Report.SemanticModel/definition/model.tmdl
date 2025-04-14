@@ -1,0 +1,25 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Orders","Returns","Key Measures"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.141.1558.0 (25.03)+75b5f06a991f8f8a8a4d6b6fcd0f66e1ec2d6fdc
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","DaxQueryView_Desktop","DevMode"]
+
+ref table Orders
+ref table DateTableTemplate_35023b60-9246-4db6-a57e-d45c45ff0db1
+ref table LocalDateTable_1d345815-6fbd-4080-acf8-9929eb5be3a2
+ref table Returns
+ref table 'Date table'
+ref table 'Key Measures'
+
+ref cultureInfo en-CA
+
